@@ -99,6 +99,11 @@ def generate_data_from_datasets(dest, loc, datasets, curlThreshold = 0.49, veloc
                 numIms += 1
                 newIdx = numIms
             
+                # Put in velocity data
+                #inm = dIm;
+                #inm[:,:,1] = vIm[:,:,0]
+                #inm[:,:,2] = vIm[:,:,1]
+            
                 # Compute the mask
                 msk = (np.abs(cIm[:,:,0] - 127.5)/255. >= curlThreshold) * (vnorm(vIm) >= velocityThreshold)
                 #print("\t\t - Image shapes are",dIm.shape, vIm.shape, cIm.shape, msk.shape)
@@ -108,6 +113,7 @@ def generate_data_from_datasets(dest, loc, datasets, curlThreshold = 0.49, veloc
                 #print("\t\t - Saving mask to mask/img folder as",str(newIdx)+".png")
         
                 # Save file
+                #Image.fromarray(inm).save(dest+"/"+segment+"/image/img/"+str(newIdx)+".png")
                 Image.fromarray(dIm).save(dest+"/"+segment+"/image/img/"+str(newIdx)+".png")
                 Image.fromarray(msk).save(dest+"/"+segment+"/mask/img/"+str(newIdx)+".png")
             
